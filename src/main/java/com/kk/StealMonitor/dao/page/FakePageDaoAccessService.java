@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository("fakePageDao")
 public class FakePageDaoAccessService implements PageDao{
 
-    List<Page> pages = new ArrayList<>();
+    private List<Page> pages = new ArrayList<>();
 
     @Override
     public List<Page> getAllPages() {
@@ -20,6 +20,7 @@ public class FakePageDaoAccessService implements PageDao{
 
     @Override
     public Optional<Page> selectPageById(UUID id) {
+        pages.add(new Page(UUID.fromString("61c91a42-3204-4603-b554-1cf5bd72f3d1"), "sd", "ds", "ds", "sd", "sd"));
         return pages.stream().filter(page -> page.getId().equals(id)).findFirst();
     }
 }
