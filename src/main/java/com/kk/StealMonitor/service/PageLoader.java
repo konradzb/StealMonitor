@@ -46,6 +46,7 @@ public class PageLoader {
             Class<?> classObject;
             Scraper scraper = null;
 
+
 //                Constructor<?> classConstructor = classObject.getConstructor(ScrapModule.class);
 //                scraper = (Scraper) classConstructor.newInstance(scrapModule);
             try {
