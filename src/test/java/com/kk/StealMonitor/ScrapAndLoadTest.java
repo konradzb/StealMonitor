@@ -59,19 +59,5 @@ public class ScrapAndLoadTest {
         System.out.println(p.getImg());
         System.out.println(p.getCategory());
     }
-    @Test
-    public void productTest() {
-        Product p = new Product(UUID.randomUUID(),
-                "link",
-                "name",
-                "name",
-                "old",
-                "new",
-                "re",
-                "limit",
-                "img",
-                "category");
-        soutProduct(p);
-    }
 
 }

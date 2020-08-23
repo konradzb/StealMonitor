@@ -5,6 +5,7 @@ import java.util.UUID;
 public class Product {
 
     private UUID id;
+    private int id_auto;
     private String siteLink;
     private String siteName;
     private String name;
@@ -28,6 +29,10 @@ public class Product {
 
     public UUID getId() {
         return id;
+    }
+
+    public int getId_auto() {
+        return id_auto;
     }
 
     public String getSiteLink() {
