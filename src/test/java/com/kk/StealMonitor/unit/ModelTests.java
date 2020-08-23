@@ -1,4 +1,4 @@
-package com.kk.StealMonitor;
+package com.kk.StealMonitor.unit;
 
 import com.kk.StealMonitor.model.Page;
 import com.kk.StealMonitor.model.Product;
