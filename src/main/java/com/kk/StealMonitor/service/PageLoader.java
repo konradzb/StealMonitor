@@ -24,9 +24,7 @@ public class PageLoader {
 
     public List<Product> loadProducts(String url, String divClassName, String scraperClassPath){
 
-//        List<Product> products = new ArrayList<>();
         Document document = null;
-
         try {
             document = Jsoup.connect(url).get();
         } catch (IOException ex) {
@@ -37,31 +35,23 @@ public class PageLoader {
         Elements productDivs = document.getElementsByClass(divClassName);
 
           return productDivs.stream().map(element -> {
-            Class<?> c = null;
+            Class<?> classObject;
             Scraper scraper = null;
 
             try {
-                c = Class.forName(scraperClassPath);
-                Constructor<?> cons = c.getConstructor();
-                //TEMPORARY XKOMSCRAPER
-                scraper = (XKomScraper) cons.newInstance();
+                classObject = Class.forName(scraperClassPath);
+                Constructor<?> classContructor = classObject.getConstructor();
+                scraper = (Scraper) classContructor.newInstance();
             } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
-              System.out.println(element);
+
+              //System.out.println(element);
               assert scraper != null;
-              return scraper.scrap(element);
+
+              Product p = scraper.scrap(element);
+              return p;
 
           }).collect(Collectors.toList());
-
-//        for (Element element : productDivs) {
-//
-//            Class<?> c = Class.forName(scraperClassPath);
-//            Constructor<?> cons = c.getConstructor(Element.class);
-//            scraper = (Scraper) cons.newInstance(element);
-//
-//            scraper.scrap(element);
-//        }
-//        return products;
     }
 }
