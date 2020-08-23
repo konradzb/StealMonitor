@@ -48,8 +48,8 @@ public class PageLoader {
 
             try {
                 classObject = Class.forName(scraperClassPath);
-                Constructor<?> classConstructor = classObject.getConstructor(ScrapModule.class);
-                scraper = (Scraper) classConstructor.newInstance(scrapModule);
+//                Constructor<?> classConstructor = classObject.getConstructor(ScrapModule.class);
+//                scraper = (Scraper) classConstructor.newInstance(scrapModule);
             } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
