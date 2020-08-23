@@ -25,5 +25,6 @@ public class XKomScraper implements Scraper {
                 "limit",
                 "img",
                 "category");
+
     }
 }
