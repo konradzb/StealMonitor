@@ -3,10 +3,8 @@ package com.kk.StealMonitor.service;
 import com.kk.StealMonitor.model.Product;
 import com.kk.StealMonitor.service.scrapers.ScrapModule;
 import com.kk.StealMonitor.service.scrapers.Scraper;
-import com.kk.StealMonitor.service.scrapers.XKomScraper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
