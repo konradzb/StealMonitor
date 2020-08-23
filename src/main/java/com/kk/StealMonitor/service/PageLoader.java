@@ -46,17 +46,16 @@ public class PageLoader {
             Class<?> classObject;
             Scraper scraper = null;
 
-//                Constructor<?> classConstructor = classObject.getConstructor(ScrapModule.class);
-//                scraper = (Scraper) classConstructor.newInstance(scrapModule);
             try {
-                classObject = Class.forName(scraperClassPath);
+                classObject = Class.forName(scraperClassPath);          
+                Constructor<?> classConstructor = classObject.getConstructor(ScrapModule.class);
+                scraper = (Scraper) classConstructor.newInstance(scrapModule);
             } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
 
               //System.out.println(element);
               assert scraper != null;
-
               Product p = scraper.scrap(element);
               return p;
 
