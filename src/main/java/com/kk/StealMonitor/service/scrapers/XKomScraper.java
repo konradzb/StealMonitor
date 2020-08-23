@@ -6,6 +6,11 @@ import org.jsoup.nodes.Element;
 import java.util.UUID;
 
 public class XKomScraper implements Scraper {
+    private ScrapModule scrapModule;
+
+    public XKomScraper(ScrapModule scrapModule) {
+        this.scrapModule = scrapModule;
+    }
 
     @Override
     public Product scrap(Element element) {
@@ -20,6 +25,5 @@ public class XKomScraper implements Scraper {
                 "limit",
                 "img",
                 "category");
-
     }
 }

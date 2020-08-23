@@ -1,12 +1,14 @@
 package com.kk.StealMonitor.service;
 
 import com.kk.StealMonitor.model.Product;
+import com.kk.StealMonitor.service.scrapers.ScrapModule;
 import com.kk.StealMonitor.service.scrapers.Scraper;
 import com.kk.StealMonitor.service.scrapers.XKomScraper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -21,6 +23,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class PageLoader {
+    private ScrapModule scrapModule;
+
+    @Autowired
+    public PageLoader(ScrapModule scrapModule) {
+        this.scrapModule = scrapModule;
+    }
 
     public List<Product> loadProducts(String url, String divClassName, String scraperClassPath){
 
@@ -40,8 +48,8 @@ public class PageLoader {
 
             try {
                 classObject = Class.forName(scraperClassPath);
-                Constructor<?> classContructor = classObject.getConstructor();
-                scraper = (Scraper) classContructor.newInstance();
+                Constructor<?> classConstructor = classObject.getConstructor(ScrapModule.class);
+                scraper = (Scraper) classConstructor.newInstance(scrapModule);
             } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
