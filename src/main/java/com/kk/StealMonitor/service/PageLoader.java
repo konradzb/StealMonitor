@@ -56,7 +56,6 @@ public class PageLoader {
 
               //System.out.println(element);
               assert scraper != null;
-
               Product p = scraper.scrap(element);
               return p;
 
