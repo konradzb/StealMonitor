@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class ProductDaoTest {
 
     @Autowired
-    FakeProductDaoAccessService productDao;
+    private FakeProductDaoAccessService productDao;
 
     @Test
     public void insertProductTest() {

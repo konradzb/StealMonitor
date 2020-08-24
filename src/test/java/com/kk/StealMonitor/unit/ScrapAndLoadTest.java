@@ -1,7 +1,9 @@
 package com.kk.StealMonitor.unit;
 
+import com.kk.StealMonitor.dao.product.FakeProductDaoAccessService;
 import com.kk.StealMonitor.model.Product;
 import com.kk.StealMonitor.service.PageLoader;
+import com.kk.StealMonitor.service.ScheduleRunner;
 import com.kk.StealMonitor.service.scrapers.Scraper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -22,6 +24,8 @@ public class ScrapAndLoadTest {
     private PageLoader pageLoader;
     @MockBean
     private Scraper scraper;
+    @Autowired
+    private ScheduleRunner runner;
 
     @Test
     public void loadProductsTest() {
@@ -45,6 +49,11 @@ public class ScrapAndLoadTest {
 
         assertEquals(products.size(), 1);
         if(products.size()>0) soutProduct(products.get(0));
+    }
+
+    @Test
+    public void load_XKom_HotShot_Test() {
+        assertEquals(1, runner.load_XKom_HotShot());
     }
 
     private void soutProduct(Product p) {
