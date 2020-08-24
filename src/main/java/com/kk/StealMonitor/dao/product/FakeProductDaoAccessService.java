@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository("fakeProductDao")
-public class FakeProductDaoAccessService implements ProductDaoEdit, ProductDaoGet {
+public class FakeProductDaoAccessService implements ProductDao {
     private List<Product> products = new ArrayList<>();
 
     @Override
