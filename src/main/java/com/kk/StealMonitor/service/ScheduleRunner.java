@@ -33,15 +33,6 @@ public class ScheduleRunner {
         return 1;
     }
 
-//    public int addTask(Product product) {
-//        return productDao.insertProduct(product);
-//    }
-//
-//    public List<Product> getAllProducts() {
-//        return productDao.getAllProducts();
-//    }
-//
-//    public
 
 
 
