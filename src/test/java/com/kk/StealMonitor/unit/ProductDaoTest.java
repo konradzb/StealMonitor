@@ -40,7 +40,7 @@ public class ProductDaoTest {
                 img,
                 category);
         productDao.insertProduct(id,product);
-        Product p = productDao.selectTaskById(id).get();
+        Product p = productDao.selectProductById(id).get();
 
         assertEquals(p.getId(), id);
     }

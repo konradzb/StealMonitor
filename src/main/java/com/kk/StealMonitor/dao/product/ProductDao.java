@@ -19,7 +19,7 @@ public interface ProductDao {
 
     List<Product> getProductsWithCustomSql(String sql);
 
-    Optional<Product> selectTaskById(UUID id);
+    Optional<Product> selectProductById(UUID id);
 
     int deleteTask(UUID id);
 }
