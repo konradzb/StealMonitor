@@ -32,9 +32,8 @@ public class ProductRestController {
         return productGetService.getProductsWithCustomSql(sql);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("select/{id}")
     public Optional<Product> selectById(@PathVariable("id") UUID id) {
-        System.out.println("SELECTBYID");
         return productGetService.selectProductById(id);
     }
 }
