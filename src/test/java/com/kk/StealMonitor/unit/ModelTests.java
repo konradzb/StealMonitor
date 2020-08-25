@@ -9,7 +9,6 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
-@SpringBootTest
 public class ModelTests {
 
     @Test
