@@ -1,4 +1,4 @@
-package com.kk.StealMonitor.service;
+package com.kk.StealMonitor.service.product;
 
 import com.kk.StealMonitor.dao.product.ProductDao;
 import com.kk.StealMonitor.dao.product.ProductDaoGet;

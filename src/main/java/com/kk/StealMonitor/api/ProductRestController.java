@@ -1,7 +1,7 @@
 package com.kk.StealMonitor.api;
 
 import com.kk.StealMonitor.model.Product;
-import com.kk.StealMonitor.service.ProductGetService;
+import com.kk.StealMonitor.service.product.ProductGetService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

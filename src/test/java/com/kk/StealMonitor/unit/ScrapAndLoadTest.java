@@ -34,8 +34,8 @@ public class ScrapAndLoadTest {
         String scraperPath = "com.kk.StealMonitor.service.scrapers.XKomScraper";
 
         Mockito.when(scraper.scrap(Mockito.any())).thenReturn(new Product(UUID.randomUUID(),
-                "link",
-                "name",
+                " ",
+                "",
                 "name",
                 "old",
                 "new",
