@@ -1,29 +1,29 @@
-package com.kk.StealMonitor.unit;
+package com.kk.StealMonitor.unit.dao;
 
-import com.kk.StealMonitor.dao.product.ProductDao;
+import com.kk.StealMonitor.dao.product.FakeProductDaoAccessService;
 import com.kk.StealMonitor.model.Product;
 import com.kk.StealMonitor.service.product.ProductEditService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.UUID;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @SpringBootTest
-public class ProductService {
+public class ProductDaoTest {
+
+    @Autowired
+    private FakeProductDaoAccessService productDao;
 
     @Autowired
     private ProductEditService productEditService;
 
-    @MockBean
-    private ProductDao productDao;
+
 
     @Test
-    public void insertProductService() {
+    public void insertProductTest() {
         UUID id = UUID.randomUUID();
         String name = "name";
         String link = "link";
@@ -45,10 +45,9 @@ public class ProductService {
                 limitQuantity,
                 img,
                 category);
+        productDao.insertProduct(id,product);
+        Product p = productDao.selectTaskById(id).get();
 
-        Mockito.when(productDao.insertProduct(id, product)).thenReturn(1);
-
-        assertEquals(productEditService.insertProduct(id, product), 1);
-
+        assertEquals(p.getId(), id);
     }
 }

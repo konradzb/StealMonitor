@@ -1,4 +1,4 @@
-package com.kk.StealMonitor.unit;
+package com.kk.StealMonitor.unit.dao;
 
 import com.kk.StealMonitor.dao.page.FakePageDaoAccessService;
 import org.junit.jupiter.api.Test;
