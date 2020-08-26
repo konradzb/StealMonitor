@@ -4,28 +4,37 @@ import com.google.common.base.Strings;
 import com.kk.StealMonitor.dao.product.ProductDao;
 import com.kk.StealMonitor.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class ProductEditService {
 
+    @Autowired
     private ProductDao productDao;
 
     @Autowired
-    public ProductEditService(ProductDao productDao) {
+    public ProductEditService(@Qualifier("fakeProductDao") ProductDao productDao) {
         this.productDao = productDao;
     }
 
     public int insertProduct(UUID id, Product newTask) {
-        // do sprawdzenia
         if(Strings.isNullOrEmpty(newTask.getName())
-        || Strings.isNullOrEmpty(newTask.getSiteName())) {
+        || Strings.isNullOrEmpty(newTask.getSiteName())
+        || Strings.isNullOrEmpty(newTask.getSiteLink())
+        || Strings.isNullOrEmpty(newTask.getOldPrice())
+        || Strings.isNullOrEmpty(newTask.getNewPrice())
+        || Strings.isNullOrEmpty(newTask.getRemainingQuantity())
+        || Strings.isNullOrEmpty(newTask.getLimitQuantity())
+        || Strings.isNullOrEmpty(newTask.getImg())) {
             return 0;
         }
-        return productDao.insertProduct(id, newTask);
 
+        return productDao.insertProduct(id, newTask);
     }
 
     public List<Product> getAllProducts() {

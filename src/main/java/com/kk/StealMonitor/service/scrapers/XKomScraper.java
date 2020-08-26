@@ -16,15 +16,14 @@ public class XKomScraper implements Scraper {
     public Product scrap(Element element) {
 
         return new Product(UUID.randomUUID(),
-                null,
+                "name",
                 "name",
                 "name",
                 "old",
                 "new",
                 "re",
                 "limit",
-                "img",
+                "",
                 "category");
-
     }
 }

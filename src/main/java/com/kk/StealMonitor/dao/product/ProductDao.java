@@ -8,10 +8,10 @@ import java.util.UUID;
 
 public interface ProductDao {
 
-    int insertProduct(UUID id, Product newTask);
+    int insertProduct(UUID id, Product product);
 
-    default int insertProduct(Product newTask) {
-        insertProduct(UUID.randomUUID(), newTask);
+    default int insertProduct(Product product) {
+        insertProduct(UUID.randomUUID(), product);
         return 1;
     }
 
