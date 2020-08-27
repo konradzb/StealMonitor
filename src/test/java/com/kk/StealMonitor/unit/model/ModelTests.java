@@ -1,4 +1,4 @@
-package com.kk.StealMonitor.unit;
+package com.kk.StealMonitor.unit.model;
 
 import com.kk.StealMonitor.model.Page;
 import com.kk.StealMonitor.model.Product;
@@ -14,9 +14,9 @@ public class ModelTests {
     @Test
     public void productTest() {
         UUID id = UUID.randomUUID();
-        String name = "name";
+        String name = null;
+        String siteName = "";
         String link = "link";
-        String siteName = "name";
         String oldPrice = "old";
         String newPrice = "new";
         String remainingQuantity = "re";
@@ -25,9 +25,9 @@ public class ModelTests {
         String category = "category";
 
         Product p = new Product(id,
-                link,
                 name,
                 siteName,
+                link,
                 oldPrice,
                 newPrice,
                 remainingQuantity,
@@ -36,9 +36,9 @@ public class ModelTests {
                 category);
 
         assertEquals(p.getId(), id);
-        assertEquals(p.getSiteLink(), link);
         assertEquals(p.getName(), name);
         assertEquals(p.getSiteName(), siteName);
+        assertEquals(p.getSiteLink(), link);
         assertEquals(p.getOldPrice(), oldPrice);
         assertEquals(p.getNewPrice(), newPrice);
         assertEquals(p.getRemainingQuantity(), remainingQuantity);

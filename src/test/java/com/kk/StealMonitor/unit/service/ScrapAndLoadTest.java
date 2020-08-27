@@ -1,10 +1,12 @@
-package com.kk.StealMonitor.unit;
+package com.kk.StealMonitor.unit.service;
 
 import com.kk.StealMonitor.dao.product.FakeProductDaoAccessService;
 import com.kk.StealMonitor.model.Product;
 import com.kk.StealMonitor.service.PageLoader;
 import com.kk.StealMonitor.service.ScheduleRunner;
+import com.kk.StealMonitor.service.scrapers.ScrapModule;
 import com.kk.StealMonitor.service.scrapers.Scraper;
+import com.kk.StealMonitor.service.scrapers.XKomScraper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -23,7 +25,7 @@ public class ScrapAndLoadTest {
     @Autowired
     private PageLoader pageLoader;
     @MockBean
-    private Scraper scraper;
+    private XKomScraper scraper;
     @Autowired
     private ScheduleRunner runner;
 
@@ -34,8 +36,8 @@ public class ScrapAndLoadTest {
         String scraperPath = "com.kk.StealMonitor.service.scrapers.XKomScraper";
 
         Mockito.when(scraper.scrap(Mockito.any())).thenReturn(new Product(UUID.randomUUID(),
-                "link",
-                "name",
+                " here ",
+                "",
                 "name",
                 "old",
                 "new",

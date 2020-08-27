@@ -13,17 +13,17 @@ public class FakeProductDaoAccessService implements ProductDao {
     private List<Product> products = new ArrayList<>();
 
     @Override
-    public int insertProduct(UUID id, Product newTask) {
+    public int insertProduct(UUID id, Product product) {
         products.add(new Product(id,
-                newTask.getName(),
-                newTask.getSiteName(),
-                newTask.getSiteLink(),
-                newTask.getNewPrice(),
-                newTask.getOldPrice(),
-                newTask.getImg(),
-                newTask.getRemainingQuantity(),
-                newTask.getLimitQuantity(),
-                newTask.getCategory()));
+                product.getName(),
+                product.getSiteName(),
+                product.getSiteLink(),
+                product.getNewPrice(),
+                product.getOldPrice(),
+                product.getImg(),
+                product.getRemainingQuantity(),
+                product.getLimitQuantity(),
+                product.getCategory()));
         return 1;
     }
 
