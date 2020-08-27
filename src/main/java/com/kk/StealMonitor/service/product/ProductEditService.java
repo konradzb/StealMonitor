@@ -52,5 +52,4 @@ public class ProductEditService {
     public int deleteTask(UUID id) {
         return productDao.deleteTask(id);
     }
-
 }
