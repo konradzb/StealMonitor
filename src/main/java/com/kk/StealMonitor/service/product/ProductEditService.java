@@ -14,7 +14,6 @@ import java.util.UUID;
 @Service
 public class ProductEditService {
 
-    @Autowired
     private ProductDao productDao;
 
     @Autowired

@@ -1,6 +1,8 @@
 package com.kk.StealMonitor.dao.product;
 
 import com.kk.StealMonitor.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,6 +11,13 @@ import java.util.UUID;
 
 @Repository("PostgresProduct")
 public class ProductDaoAccessService implements ProductDao{
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public ProductDaoAccessService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     @Override
     public int insertProduct(UUID id, Product product) {
         return 0;
