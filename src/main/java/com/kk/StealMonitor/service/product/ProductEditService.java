@@ -46,7 +46,7 @@ public class ProductEditService {
     }
 
     public Optional<Product> selectTaskById(UUID id) {
-        return productDao.selectTaskById(id);
+        return productDao.selectProductById(id);
     }
 
     public int deleteTask(UUID id) {
