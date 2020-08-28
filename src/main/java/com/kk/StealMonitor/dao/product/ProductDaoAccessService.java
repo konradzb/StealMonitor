@@ -37,6 +37,27 @@ public class ProductDaoAccessService implements ProductDao{
     @Override
     public List<Product> getAllProducts() {
         final String sql = "SELECT * FROM products;";
+        return returnListFromDB(sql);
+    }
+
+    @Override
+    public List<Product> getProductsWithCustomSql(String sql) {
+        return returnListFromDB(sql);
+    }
+
+    @Override
+    public Optional<Product> selectProductById(UUID id) {
+        //return getAllProducts().stream().filter(product -> product.getId().equals(id)).findFirst();
+        final String sql = "SELECT * FROM products WHERE id='"+id+"'";
+        return returnListFromDB(sql).stream().findFirst();
+    }
+
+    @Override
+    public int deleteTask(UUID id) {
+        return 0;
+    }
+
+    private List<Product> returnListFromDB(String sql) {
         return jdbcTemplate.query(sql, ((resultSet, i) -> {
             UUID id = UUID.fromString(resultSet.getString("id"));
             String name = resultSet.getString("name");
@@ -51,23 +72,5 @@ public class ProductDaoAccessService implements ProductDao{
 
             return new Product(id, name, siteName, siteLink, oldPrice, newPrice, remainingQuantity, limitQuantity, img, category);
         }));
-    }
-
-    @Override
-    public List<Product> getProductsWithCustomSql(String sql) {
-        return null;
-    }
-
-    @Override
-    public Optional<Product> selectProductById(UUID id) {
-        //return getAllProducts().stream().filter(product -> product.getId().equals(id)).findFirst();
-        final String sql = "SELECT * FROM products WHERE id="+id;
-        jdbcTemplate.update(sql);
-        return Optional.empty();
-    }
-
-    @Override
-    public int deleteTask(UUID id) {
-        return 0;
     }
 }
