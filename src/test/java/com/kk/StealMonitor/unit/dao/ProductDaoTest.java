@@ -90,4 +90,11 @@ public class ProductDaoTest {
         UUID id = UUID.fromString("68c5db84-f41c-4156-9892-0f07b5e86192");
         assertEquals(productDaoAccessService.selectProductById(id).get().getId(), id);
     }
+    @Test
+    public void deleteProductPSQL() {
+        UUID id = UUID.fromString("548ef04c-6422-4158-98b6-89c8c91178fc");
+        int size = productDaoAccessService.getAllProducts().size();
+        assertEquals(productDaoAccessService.deleteTask(id), 1);
+        assertEquals(productDaoAccessService.getAllProducts().size(), size-1);
+    }
 }

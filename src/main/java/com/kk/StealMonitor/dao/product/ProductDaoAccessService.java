@@ -47,14 +47,14 @@ public class ProductDaoAccessService implements ProductDao{
 
     @Override
     public Optional<Product> selectProductById(UUID id) {
-        //return getAllProducts().stream().filter(product -> product.getId().equals(id)).findFirst();
         final String sql = "SELECT * FROM products WHERE id='"+id+"'";
         return returnListFromDB(sql).stream().findFirst();
     }
 
     @Override
     public int deleteTask(UUID id) {
-        return 0;
+        final String sql = "DELETE FROM products WHERE id='"+id+"'";
+        return jdbcTemplate.update(sql);
     }
 
     private List<Product> returnListFromDB(String sql) {
