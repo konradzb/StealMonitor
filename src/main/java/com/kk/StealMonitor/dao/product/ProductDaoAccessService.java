@@ -20,11 +20,23 @@ public class ProductDaoAccessService implements ProductDao{
 
     @Override
     public int insertProduct(UUID id, Product product) {
-        return 0;
+        final String sql = "INSERT INTO products (id, name, site_name, site_link, old_price, new_price, remaining_quantity, limit_quantity, img_string, category) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        return jdbcTemplate.update(sql, id,
+                product.getName(),
+                product.getSiteName(),
+                product.getSiteLink(),
+                product.getNewPrice(),
+                product.getOldPrice(),
+                product.getImg(),
+                product.getRemainingQuantity(),
+                product.getLimitQuantity(),
+                product.getCategory());
     }
 
     @Override
     public List<Product> getAllProducts() {
+        //final
         return null;
     }
 
@@ -35,6 +47,9 @@ public class ProductDaoAccessService implements ProductDao{
 
     @Override
     public Optional<Product> selectProductById(UUID id) {
+        //return getAllProducts().stream().filter(product -> product.getId().equals(id)).findFirst();
+        final String sql = "SELECT * FROM products WHERE id="+id;
+        jdbcTemplate.update(sql);
         return Optional.empty();
     }
 
