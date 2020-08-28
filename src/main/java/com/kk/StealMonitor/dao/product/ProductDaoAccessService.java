@@ -36,8 +36,21 @@ public class ProductDaoAccessService implements ProductDao{
 
     @Override
     public List<Product> getAllProducts() {
-        //final
-        return null;
+        final String sql = "SELECT * FROM products;";
+        return jdbcTemplate.query(sql, ((resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("id"));
+            String name = resultSet.getString("name");
+            String siteName = resultSet.getString("site_name");
+            String siteLink = resultSet.getString("site_link");
+            String oldPrice = resultSet.getString("old_price");
+            String newPrice = resultSet.getString("new_price");
+            String remainingQuantity = resultSet.getString("remaining_quantity");
+            String limitQuantity = resultSet.getString("limit_quantity");
+            String img = resultSet.getString("img_string");
+            String category = resultSet.getString("category");
+
+            return new Product(id, name, siteName, siteLink, oldPrice, newPrice, remainingQuantity, limitQuantity, img, category);
+        }));
     }
 
     @Override

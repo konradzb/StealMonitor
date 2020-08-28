@@ -10,8 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @SpringBootTest
 public class ProductDaoTest {
@@ -80,5 +79,10 @@ public class ProductDaoTest {
         productDao.insertProduct(id,product);
 
         assertEquals(productDaoAccessService.insertProduct(id, product), 1);
+    }
+    @Test
+    public void getAllTasks() {
+        assertNotNull(productDaoAccessService.getAllProducts());
+        assertNotEquals(productDaoAccessService.getAllProducts().size(), 0);
     }
 }
