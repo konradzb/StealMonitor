@@ -53,11 +53,6 @@ public class ScrapAndLoadTest {
         if(products.size()>0) soutProduct(products.get(0));
     }
 
-    @Test
-    public void load_XKom_HotShot_Test() {
-        assertEquals(1, runner.load_XKom_HotShot());
-    }
-
     private void soutProduct(Product p) {
         System.out.println(p.getId());
         System.out.println(p.getName());

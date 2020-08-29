@@ -17,7 +17,7 @@ public class ProductEditService {
     private ProductDao productDao;
 
     @Autowired
-    public ProductEditService(@Qualifier("fakeProductDao") ProductDao productDao) {
+    public ProductEditService(@Qualifier("PostgresProduct") ProductDao productDao) {
         this.productDao = productDao;
     }
 
@@ -32,7 +32,6 @@ public class ProductEditService {
         || Strings.isNullOrEmpty(newTask.getImg())) {
             return 0;
         }
-
         return productDao.insertProduct(id, newTask);
     }
 
