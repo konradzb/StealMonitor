@@ -27,4 +27,18 @@ public class PageDaoAccessService implements PageDao {
     public Optional<Page> selectPageById(UUID id) {
         return Optional.empty();
     }
+
+    private List<Page> returnListFromDB(String sql) {
+        return jdbcTemplate.query(sql, ((resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("id"));
+            int idAuto = Integer.parseInt(resultSet.getString("id_auto"));
+            String url = resultSet.getString("url");
+            String divClassName = resultSet.getString("div_class_name");
+            String scraperClassPath = resultSet.getString("scraper_class_path");
+            String updateTime = resultSet.getString("update_time");
+            String getTime = resultSet.getString("get_time");
+
+            return new Page(id, idAuto, url, divClassName, scraperClassPath, updateTime, getTime);
+        }));
+    }
 }

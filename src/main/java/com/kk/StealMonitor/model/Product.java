@@ -14,8 +14,9 @@ public class Product {
     private String img;
     private String category;
 
-    public Product(UUID id, String name, String siteName, String siteLink, String oldPrice, String newPrice, String remainingQuantity, String limitQuantity, String img, String category) {
+    public Product(UUID id, int id_auto, String name, String siteName, String siteLink, String oldPrice, String newPrice, String remainingQuantity, String limitQuantity, String img, String category) {
         this.id = id;
+        this.id_auto = id_auto;
         this.siteLink = siteLink;
         this.siteName = siteName;
         this.name = name;
@@ -25,6 +26,10 @@ public class Product {
         this.limitQuantity = limitQuantity;
         this.img = img;
         this.category = category;
+    }
+
+    public Product(UUID id, String name, String siteName, String siteLink, String oldPrice, String newPrice, String remainingQuantity, String limitQuantity, String img, String category) {
+        this(id, -1, name, siteName, siteLink, oldPrice, newPrice, remainingQuantity, limitQuantity, img, category);
     }
 
     public UUID getId() {
