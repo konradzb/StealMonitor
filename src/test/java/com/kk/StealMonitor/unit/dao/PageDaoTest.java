@@ -31,6 +31,12 @@ public class PageDaoTest {
     public void getAllPages() {
         assertNotNull(pageDaoAccessService.getAllPages());
         assertNotEquals(pageDaoAccessService.getAllPages().size(), 0);
+    }
 
+    @Test
+    public void selectPageByIdPSQL() {
+        UUID id = UUID.fromString("db93cfeb-22e2-4b24-b977-eafec906e1a2");
+        assertFalse(pageDaoAccessService.selectPageById(id).isEmpty());
+        assertEquals(pageDaoAccessService.selectPageById(id).get().getId(), id);
     }
 }

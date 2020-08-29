@@ -20,12 +20,14 @@ public class PageDaoAccessService implements PageDao {
 
     @Override
     public List<Page> getAllPages() {
-        return null;
+        final String sql = "SELECT * FROM pages;";
+        return returnListFromDB(sql);
     }
 
     @Override
     public Optional<Page> selectPageById(UUID id) {
-        return Optional.empty();
+        final String sql = "SELECT * FROM pages WHERE id='" + id + "';";
+        return returnListFromDB(sql).stream().findFirst();
     }
 
     private List<Page> returnListFromDB(String sql) {
