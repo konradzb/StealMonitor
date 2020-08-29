@@ -3,7 +3,6 @@ package com.kk.StealMonitor.unit.model;
 import com.kk.StealMonitor.model.Page;
 import com.kk.StealMonitor.model.Product;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.UUID;
 
@@ -61,7 +60,7 @@ public class ModelTests {
         assertEquals(p.getId(), id);
         assertEquals(p.getDivClassName(), divClassName);
         assertEquals(p.getScraperClassPath(), scraperClassPath);
-        assertEquals(p.getRefreshTime(), refreshTime);
-        assertEquals(p.getHoursBetween(), hoursBetween);
+        assertEquals(p.getUpdateTime(), refreshTime);
+        assertEquals(p.getGetTime(), hoursBetween);
     }
 }

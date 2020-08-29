@@ -14,11 +14,10 @@ import java.util.UUID;
 @Service
 public class ProductEditService {
 
-    @Autowired
     private ProductDao productDao;
 
     @Autowired
-    public ProductEditService(@Qualifier("fakeProductDao") ProductDao productDao) {
+    public ProductEditService(@Qualifier("PostgresProduct") ProductDao productDao) {
         this.productDao = productDao;
     }
 
@@ -33,7 +32,6 @@ public class ProductEditService {
         || Strings.isNullOrEmpty(newTask.getImg())) {
             return 0;
         }
-
         return productDao.insertProduct(id, newTask);
     }
 
@@ -46,11 +44,10 @@ public class ProductEditService {
     }
 
     public Optional<Product> selectTaskById(UUID id) {
-        return productDao.selectTaskById(id);
+        return productDao.selectProductById(id);
     }
 
     public int deleteTask(UUID id) {
         return productDao.deleteTask(id);
     }
-
 }

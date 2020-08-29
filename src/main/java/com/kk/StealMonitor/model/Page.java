@@ -5,19 +5,24 @@ import java.util.UUID;
 public class Page {
     private UUID id;
     private int id_auto;
-    private String url = null;
+    private String url;
     private String divClassName;
     private String scraperClassPath;
-    private String refreshTime;
-    private String hoursBetween;
+    private String updateTime;
+    private String getTime;
 
-    public Page(UUID id, String url, String divClassName, String scraperClassPath, String refreshTime, String hoursBetween) {
+    public Page(UUID id, int id_auto, String url, String divClassName, String scraperClassPath, String updateTime, String hoursBetween) {
         this.id = id;
+        this.id_auto = id_auto;
         this.url = url;
         this.divClassName = divClassName;
         this.scraperClassPath = scraperClassPath;
-        this.refreshTime = refreshTime;
-        this.hoursBetween = hoursBetween;
+        this.updateTime = updateTime;
+        this.getTime = hoursBetween;
+    }
+
+    public Page(UUID id, String url, String divClassName, String scraperClassPath, String updateTime, String hoursBetween) {
+        this(id, -1, url, divClassName, scraperClassPath, updateTime, hoursBetween);
     }
 
     public UUID getId() {
@@ -40,12 +45,11 @@ public class Page {
         return scraperClassPath;
     }
 
-    public String getRefreshTime() {
-        return refreshTime;
+    public String getUpdateTime() {
+        return updateTime;
     }
 
-    public String getHoursBetween() {
-        return hoursBetween;
+    public String getGetTime() {
+        return getTime;
     }
-
 }
