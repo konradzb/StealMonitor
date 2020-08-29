@@ -1,4 +1,4 @@
-package com.kk.StealMonitor;
+package com.kk.StealMonitor.integration;
 
 import com.kk.StealMonitor.service.ScheduleRunner;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.Assert.*;
 @SpringBootTest
-public class ScheduleRunnerTest2 {
+public class ScheduleRunnerTestIntgr {
 
     @Autowired
     private ScheduleRunner scheduleRunner;
@@ -15,5 +15,6 @@ public class ScheduleRunnerTest2 {
     @Test
     public void load_XKom_HotShotTest() {
         assertEquals(scheduleRunner.load_XKom_HotShot(), 1);
+        //check terminal with "SELECT * FROM products;" if rows was actually added to DB
     }
 }

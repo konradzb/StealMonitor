@@ -1,17 +1,14 @@
 package com.kk.StealMonitor.service;
 
 import com.kk.StealMonitor.dao.page.PageDao;
-import com.kk.StealMonitor.dao.product.ProductDao;
 import com.kk.StealMonitor.model.Page;
 import com.kk.StealMonitor.model.Product;
 import com.kk.StealMonitor.service.product.ProductEditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.function.Function;
 
 @Service
 public class ScheduleRunner {
@@ -40,8 +37,4 @@ public class ScheduleRunner {
         products.forEach(product -> productDaoService.insertProduct(product.getId(), product));
         return 1;
     }
-
-
-
-
 }
