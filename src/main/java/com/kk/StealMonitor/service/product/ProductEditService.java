@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class ProductEditService {
@@ -19,10 +16,12 @@ public class ProductEditService {
 
     //Lists with ids, to update and delete
     private List<UUID> xKomIds;
+    private Map<String,List<UUID>> idLists;
 
     @Autowired
     public ProductEditService(@Qualifier("PostgresProduct") ProductDao productDao) {
         this.productDao = productDao;
+        this.idLists = new HashMap<>();
     }
 
     public int insertProduct(UUID id, Product newTask) {
@@ -58,6 +57,7 @@ public class ProductEditService {
         return 1;
     }
 
+    //delete these 3 methods it u didn't use them
     public List<Product> getAllProducts() {
         return productDao.getAllProducts();
     }
@@ -72,5 +72,23 @@ public class ProductEditService {
 
     public int deleteTask(UUID id) {
         return productDao.deleteTask(id);
+    }
+
+    public List<UUID> getIdList(String key) {
+        key = key.toLowerCase();
+        return idLists.get(key);
+    }
+
+    public int setOrCreateIdList(String key, List<UUID> idList) {
+        System.out.println(idList.size());
+        key = key.toLowerCase();
+        //check if it exist key like this,
+        //in case no, create one and put into idLists
+        if(idLists.containsKey(key))
+            idLists.replace(key, idList);
+        else
+            idLists.put(key, idList);
+        System.out.println(idList.size());
+        return 1;
     }
 }
