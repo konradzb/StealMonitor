@@ -19,11 +19,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PageLoader {
+public class ProductLoader {
     private ScrapModule scrapModule;
 
     @Autowired
-    public PageLoader(ScrapModule scrapModule) {
+    public ProductLoader(ScrapModule scrapModule) {
         this.scrapModule = scrapModule;
     }
 

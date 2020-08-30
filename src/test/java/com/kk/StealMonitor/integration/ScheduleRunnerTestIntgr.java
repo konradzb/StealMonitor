@@ -29,12 +29,13 @@ public class ScheduleRunnerTestIntgr {
         String key2 = "xkom_wakacyjnaPromocja";
 
         assertEquals(scheduleRunner.loadProductsToDataBaseAndSafeIDs(page, key), 1);
+        assertEquals(scheduleRunner.loadProductsToDataBaseAndSafeIDs(page, key), 1);
         //check terminal with "SELECT * FROM products;" if rows was actually added to DB
         assertNotNull(productService.getIdList(key));
 
-        assertNull(productService.getIdList(key2));
-        assertEquals(scheduleRunner.loadProductsToDataBaseAndSafeIDs(page, key2), 1);
-        assertNotNull(productService.getIdList(key));
+//        assertNull(productService.getIdList(key2));
+//        assertEquals(scheduleRunner.loadProductsToDataBaseAndSafeIDs(page, key2), 1);
+//        assertNotNull(productService.getIdList(key));
     }
     @Test
     public void updateProductsRemainingQuantityByIDsTest() {

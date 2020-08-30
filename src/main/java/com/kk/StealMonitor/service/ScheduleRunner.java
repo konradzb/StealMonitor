@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 /*
@@ -26,32 +25,41 @@ import java.util.UUID;
 @Service
 public class ScheduleRunner {
 
-    private final PageLoader pageLoader;
+    private final ProductLoader productsLoader;
     private final ProductEditService productService;
     private final PageDao pageDao;
     private final List<Page> pages;
 
     @Autowired
-    public ScheduleRunner(PageLoader pageLoader, ProductEditService productService, @Qualifier("fakePageDao") PageDao pageDao) {
-        this.pageLoader = pageLoader;
+    public ScheduleRunner(ProductLoader productsLoader, ProductEditService productService, @Qualifier("PostgresPage") PageDao pageDao) {
+        this.productsLoader = productsLoader;
         this.productService = productService;
         this.pageDao = pageDao;
         pages = this.pageDao.getAllPages();
     }
 
-
-    //@Scheduled(cron = p)
     public int loadProductsToDataBaseAndSafeIDs(Page page, String key) {
+        List<UUID> idList;
+
+        //delete old products
+         try {
+             idList = productService.getIdList(key);
+             productService.deleteListOfProducts(idList);
+             idList.clear();
+         } catch (NullPointerException ex) {
+             ex.fillInStackTrace();
+         }
+
         //load all products from given page
-        List<Product> products = pageLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
+        List<Product> products = productsLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
         //put them into DataBase, and safe its IDs
-        List<UUID> idList = productService.insertListOfProducts(products);
+        idList = productService.insertListOfProducts(products);
         productService.setOrCreateIdList(key,idList);
         return 1;
     }
 
     public int updateProductsRemainingQuantityByIDs(Page page, String key ) {
-        List<Product> products = pageLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
+        List<Product> products = productsLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
         try {
             List<UUID> idList = productService.getIdList(key);
             productService.updateListOfProducts(idList, products);
@@ -60,7 +68,5 @@ public class ScheduleRunner {
             ex.fillInStackTrace();
         }
         return 0;
-
-
     }
 }
