@@ -21,7 +21,7 @@ public class XKomScraper implements Scraper {
                 "name",
                 "old",
                 "new",
-                "re",
+                "9999",
                 "limit",
                 "img",
                 "category");

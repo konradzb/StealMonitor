@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 /*
@@ -48,12 +49,18 @@ public class ScheduleRunner {
         productService.setOrCreateIdList(key,idList);
         return 1;
     }
+
     public int updateProductsRemainingQuantityByIDs(Page page, String key ) {
         List<Product> products = pageLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
-        List<UUID> idList = productService.getIdList(key);
+        try {
+            List<UUID> idList = productService.getIdList(key);
+            productService.updateListOfProducts(idList, products);
+            return 1;
+        } catch (NullPointerException ex) {
+            ex.fillInStackTrace();
+        }
+        return 0;
 
-        if(idList.isEmpty()) return 0;
-        productService.updateListOfProducts(idList, products);
-        return 1;
+
     }
 }

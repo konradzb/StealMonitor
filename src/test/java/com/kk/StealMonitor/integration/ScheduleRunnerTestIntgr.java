@@ -38,8 +38,12 @@ public class ScheduleRunnerTestIntgr {
     }
     @Test
     public void updateProductsRemainingQuantityByIDsTest() {
+        Page page = pageDaoAccessService.getAllPages().get(0);
+        String key = "xkom_hotshot";
 
-
+        assertEquals(scheduleRunner.loadProductsToDataBaseAndSafeIDs(page, key), 1);
+        assertEquals(scheduleRunner.updateProductsRemainingQuantityByIDs(page, key), 1);
+        assertNotNull(productService.getIdList(key));
     }
 
 }
