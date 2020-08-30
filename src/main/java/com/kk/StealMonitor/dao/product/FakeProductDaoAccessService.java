@@ -68,11 +68,16 @@ public class FakeProductDaoAccessService implements ProductDao {
     }
 
     @Override
-    public int deleteTask(UUID id) {
+    public int deleteProduct(UUID id) {
         Optional<Product> product = selectProductById(id);
         if(product.isEmpty())
             return 0;
         products.remove(product);
         return 1;
+    }
+
+    @Override
+    public int updateProduct(UUID id, Product product) {
+        return 0;
     }
 }

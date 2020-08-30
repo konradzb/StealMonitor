@@ -94,7 +94,33 @@ public class ProductDaoTest {
     public void deleteProductPSQL() {
         UUID id = UUID.fromString("548ef04c-6422-4158-98b6-89c8c91178fc");
         int size = productDaoAccessService.getAllProducts().size();
-        assertEquals(productDaoAccessService.deleteTask(id), 1);
+        assertEquals(productDaoAccessService.deleteProduct(id), 1);
         assertEquals(productDaoAccessService.getAllProducts().size(), size-1);
+    }
+    @Test
+    public void updateProductPSQL() {
+        UUID id = UUID.fromString("68c5db84-f41c-4156-9892-0f07b5e86192");
+        String name = "name";
+        String link = "link";
+        String siteName = "name";
+        String oldPrice = "old";
+        String newPrice = "new";
+        String remainingQuantity = "50";
+        String limitQuantity = "limit";
+        String img = "img";
+        String category = "category";
+
+        Product product = new Product(id,
+                link,
+                name,
+                siteName,
+                oldPrice,
+                newPrice,
+                remainingQuantity,
+                limitQuantity,
+                img,
+                category);
+
+        productDaoAccessService.updateProduct(id, product);
     }
 }
