@@ -6,6 +6,7 @@ import com.kk.StealMonitor.model.Product;
 import com.kk.StealMonitor.service.product.ProductEditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +37,15 @@ public class ScheduleRunner {
         this.productService = productService;
         this.pageDao = pageDao;
         pages = this.pageDao.getAllPages();
+    }
+    @Scheduled(cron = "0 0 10/12 * * ?")
+    public void every12h_10and22() {
+        loadProductsToDataBaseAndSafeIDs(pages.get(0), "xkom_hotshot");
+    }
+    @Scheduled(cron = "0/30 * * * * ?")
+    public void every30s() {
+        System.out.println("cron works");
+        updateProductsRemainingQuantityByIDs(pages.get(0), "xkom_hotshot");
     }
 
     public int loadProductsToDataBaseAndSafeIDs(Page page, String key) {

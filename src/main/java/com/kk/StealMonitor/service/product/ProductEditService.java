@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 /*
-* write comment here
+* It's a bridge between ProductDao and ScheduleRunner,
+* handle insert, update, delete ListOfProducts
+* It stores IDs products to update and delete in Map - idLists
+* Before products goes to the DB it checks if any var is nulleeeee
 * */
 @Service
 public class ProductEditService {
@@ -17,7 +20,6 @@ public class ProductEditService {
     private ProductDao productDao;
 
     //Lists with ids, to update and delete
-    private List<UUID> xKomIds;
     private Map<String,List<UUID>> idLists;
 
     @Autowired
@@ -49,7 +51,7 @@ public class ProductEditService {
         });
         return idList;
     }
-    public int updateProductsRemaining(UUID id, Product product) {
+    private int updateProductsRemaining(UUID id, Product product) {
         return productDao.updateProduct(id, product);
     }
 
@@ -60,11 +62,10 @@ public class ProductEditService {
         return 1;
     }
 
-    public int deleteTask(UUID id) {
+    private int deleteTask(UUID id) {
         return productDao.deleteProduct(id);
     }
 
-    //to testing
     public int deleteListOfProducts(List<UUID> idList) {
         idList.forEach(this::deleteTask);
         return 1;
