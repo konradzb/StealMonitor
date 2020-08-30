@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,6 +16,9 @@ import java.util.UUID;
 public class ProductEditService {
 
     private ProductDao productDao;
+
+    //Lists with ids, to update and delete
+    private List<UUID> xKomIds;
 
     @Autowired
     public ProductEditService(@Qualifier("PostgresProduct") ProductDao productDao) {
@@ -33,6 +37,25 @@ public class ProductEditService {
             return 0;
         }
         return productDao.insertProduct(id, newTask);
+    }
+
+    public List<UUID> insertListOfProducts(List<Product> products) {
+        List<UUID> idList = new ArrayList<>();
+        products.forEach(product -> {
+            UUID id = product.getId();
+            idList.add(id);
+            productDao.insertProduct(id, product);
+        });
+        return idList;
+    }
+
+    public int updateListOfProducts() {
+        return 0;
+    }
+
+    public int deleteListOfProducts(List<UUID> idList) {
+        idList.forEach(this::deleteTask);
+        return 1;
     }
 
     public List<Product> getAllProducts() {

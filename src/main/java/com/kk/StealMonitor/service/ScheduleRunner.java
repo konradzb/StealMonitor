@@ -25,6 +25,13 @@ public class ScheduleRunner {
         this.pageDao = pageDao;
         pages = this.pageDao.getAllPages();
     }
+    //load all products to db at startup
+    public int loadAllProducts() {
+        pages.forEach(
+                page -> pageLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath()).forEach(
+                        product -> productDaoService.insertProduct(product.getId(), product)));
+        return 1;
+    }
 
     //This is how will look like other schedules
     //@Scheduled(cron = p)
@@ -37,4 +44,5 @@ public class ScheduleRunner {
         products.forEach(product -> productDaoService.insertProduct(product.getId(), product));
         return 1;
     }
+
 }
