@@ -74,4 +74,43 @@ public class ProductService {
         assertEquals(productEditService.getIdList(key).size(), idList.size());
         System.out.println(idList.size());
     }
+    @Test
+    public void updateListOfProducts() {
+        //four IDs
+        List<UUID> idList = new ArrayList<>(Arrays.asList(
+                UUID.fromString("ebc9d6a4-7fbf-46fa-b211-f63815168f74"),
+                UUID.fromString("320ec070-10b1-48f8-b025-0103be710ffd"),
+                UUID.fromString("782fa261-9603-474d-bfe0-10f126df34ae"),
+                UUID.fromString("12cd8ff3-c605-4a56-bbec-2c2d0b08d868")
+
+        ));
+        UUID id = UUID.randomUUID();
+        String name = "name";
+        String link = "link";
+        String siteName = "name";
+        String oldPrice = "old";
+        String newPrice = "new";
+        String remainingQuantity = "0000";
+        String limitQuantity = "limit";
+        String img = "img";
+        String category = "category";
+
+        //three products
+        Product product = new Product(id,
+                link,
+                name,
+                siteName,
+                oldPrice,
+                newPrice,
+                remainingQuantity,
+                limitQuantity,
+                img,
+                category);
+        List<Product> products = new ArrayList<>(Arrays.asList(new Product(id, link, name, siteName, oldPrice, newPrice, remainingQuantity, limitQuantity, img, category),
+                new Product(id, link, name, siteName, oldPrice, newPrice, remainingQuantity, limitQuantity, img, category),
+                new Product(id, link, name, siteName, oldPrice, newPrice, remainingQuantity, limitQuantity, img, category)));
+
+        //it shouldn't work
+        assertEquals(productEditService.updateListOfProducts(idList, products), 0);
+    }
 }

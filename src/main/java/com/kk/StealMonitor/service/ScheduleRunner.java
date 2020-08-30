@@ -38,15 +38,22 @@ public class ScheduleRunner {
         pages = this.pageDao.getAllPages();
     }
 
-    //This is how will look like other schedules
+
     //@Scheduled(cron = p)
     public int loadProductsToDataBaseAndSafeIDs(Page page, String key) {
-        //load all
-        // products
+        //load all products from given page
         List<Product> products = pageLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
         //put them into DataBase, and safe its IDs
         List<UUID> idList = productService.insertListOfProducts(products);
         productService.setOrCreateIdList(key,idList);
+        return 1;
+    }
+    public int updateProductsRemainingQuantityByIDs(Page page, String key ) {
+        List<Product> products = pageLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
+        List<UUID> idList = productService.getIdList(key);
+
+        if(idList.isEmpty()) return 0;
+        productService.updateListOfProducts(idList, products);
         return 1;
     }
 }

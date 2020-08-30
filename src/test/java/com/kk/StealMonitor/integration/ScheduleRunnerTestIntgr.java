@@ -36,5 +36,9 @@ public class ScheduleRunnerTestIntgr {
         assertEquals(scheduleRunner.loadProductsToDataBaseAndSafeIDs(page, key2), 1);
         assertNotNull(productService.getIdList(key));
     }
+    @Test
+    public void updateProductsRemainingQuantityByIDsTest() {
+
+    }
 
 }

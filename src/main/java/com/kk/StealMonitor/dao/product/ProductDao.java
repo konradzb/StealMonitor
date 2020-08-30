@@ -21,5 +21,7 @@ public interface ProductDao {
 
     Optional<Product> selectProductById(UUID id);
 
-    int deleteTask(UUID id);
+    int deleteProduct(UUID id);
+
+    int updateProduct(UUID id, Product product);
 }

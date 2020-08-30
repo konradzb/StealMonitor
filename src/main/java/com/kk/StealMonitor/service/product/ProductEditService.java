@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-
+/*
+* write comment here
+* */
 @Service
 public class ProductEditService {
 
@@ -47,31 +49,25 @@ public class ProductEditService {
         });
         return idList;
     }
-
-    public int updateListOfProducts() {
-        return 0;
+    public int updateProductsRemaining(UUID id, Product product) {
+        return productDao.updateProduct(id, product);
     }
 
-    public int deleteListOfProducts(List<UUID> idList) {
-        idList.forEach(this::deleteTask);
+    public int updateListOfProducts(List<UUID> idList, List<Product> products) {
+        if(idList.size()!=products.size()) return 0;
+        for (int i = 0; i < idList.size(); i++)
+            updateProductsRemaining(idList.get(i), products.get(i));
         return 1;
     }
 
-    //delete these 3 methods it u didn't use them
-    public List<Product> getAllProducts() {
-        return productDao.getAllProducts();
-    }
-
-    public List<Product> getProductsWithCustomSql(String sql) {
-        return productDao.getProductsWithCustomSql(sql);
-    }
-
-    public Optional<Product> selectTaskById(UUID id) {
-        return productDao.selectProductById(id);
-    }
-
     public int deleteTask(UUID id) {
-        return productDao.deleteTask(id);
+        return productDao.deleteProduct(id);
+    }
+
+    //to testing
+    public int deleteListOfProducts(List<UUID> idList) {
+        idList.forEach(this::deleteTask);
+        return 1;
     }
 
     public List<UUID> getIdList(String key) {
