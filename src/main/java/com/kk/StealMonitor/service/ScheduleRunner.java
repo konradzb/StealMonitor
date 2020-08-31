@@ -38,10 +38,12 @@ public class ScheduleRunner {
         this.pageDao = pageDao;
         pages = this.pageDao.getAllPages();
     }
+
     @Scheduled(cron = "0 0 10/12 * * ?")
     public void every12h_10and22() {
         loadProductsToDataBaseAndSafeIDs(pages.get(0), "xkom_hotshot");
     }
+
     @Scheduled(cron = "0/30 * * * * ?")
     public void every30s() {
         System.out.println("cron works");
@@ -50,7 +52,6 @@ public class ScheduleRunner {
 
     public int loadProductsToDataBaseAndSafeIDs(Page page, String key) {
         List<UUID> idList;
-
         //delete old products
          try {
              idList = productService.getIdList(key);
@@ -59,7 +60,6 @@ public class ScheduleRunner {
          } catch (NullPointerException ex) {
              ex.fillInStackTrace();
          }
-
         //load all products from given page
         List<Product> products = productsLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
         //put them into DataBase, and safe its IDs

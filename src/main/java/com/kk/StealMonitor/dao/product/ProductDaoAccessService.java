@@ -42,6 +42,8 @@ public class ProductDaoAccessService implements ProductDao{
 
     @Override
     public List<Product> getProductsWithCustomSql(String sql) {
+        //sql is like: "new_price < 500 AND old_price > 1000 ORDER BY old_price DESC"
+        sql = "SELECT * FROM products " + sql + ";";
         return returnListFromDB(sql);
     }
 

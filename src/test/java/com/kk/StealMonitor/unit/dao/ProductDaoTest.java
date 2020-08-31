@@ -123,4 +123,10 @@ public class ProductDaoTest {
 
         productDaoAccessService.updateProduct(id, product);
     }
+    @Test
+    public void customSql() {
+        String sql1 = "ORDER BY id_auto";
+        String sql2 = "WHERE limit_quantity>'500' " + sql1;
+        assertEquals(UUID.fromString("68c5db84-f41c-4156-9892-0f07b5e86192"), productDaoAccessService.getProductsWithCustomSql(sql2).get(0).getId());
+    }
 }

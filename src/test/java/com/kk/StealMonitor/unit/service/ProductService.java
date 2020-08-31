@@ -113,4 +113,35 @@ public class ProductService {
         //it shouldn't work
         assertEquals(productEditService.updateListOfProducts(idList, products), 0);
     }
+
+    @Test
+    public void crypt() {
+        String sql = "WHERE limit_quantity>'500' ORDER BY id_auto";
+        String a = "1234567890qwertyuiopasdfghjklzxcvbnm";
+        int size = sql.length();
+        int aLength = a.length();
+        System.out.println(aLength);
+        double[] bytes = new double[size];
+
+        for (int i = 0; i < size; i++) {
+            char singleChar = sql.charAt(i);
+            int singleCharASCII = singleChar;
+            //System.out.println(singleCharASCII);
+
+            int k = singleCharASCII;
+            do {
+
+
+            } while (k > 0);
+
+        }
+    }
+    public String recur(int k) {
+        int n = k / 12;
+        int r = k % 12;
+        k = n;
+        if(k > 0) recur(k);
+        return null;
+    }
+
 }
