@@ -55,10 +55,21 @@ public class ProductEditService {
         return productDao.updateProductRemainingQuantity(id, product);
     }
 
-    public int updateListOfProducts(List<UUID> idList, List<Product> products) {
+    public int updateRemainingListOfProducts(List<UUID> idList, List<Product> products) {
         if(idList.size()!=products.size()) return 0;
         for (int i = 0; i < idList.size(); i++)
             updateProductsRemaining(idList.get(i), products.get(i));
+        return 1;
+    }
+
+    private int updateProduct(UUID id, Product product) {
+        return productDao.updateProduct(id, product);
+    }
+
+    public int updateListOfProducts(List<UUID> idList, List<Product> products) {
+        if(idList.size()!=products.size()) return 0;
+        for (int i = 0; i < idList.size(); i++)
+            updateProduct(idList.get(i), products.get(i));
         return 1;
     }
 

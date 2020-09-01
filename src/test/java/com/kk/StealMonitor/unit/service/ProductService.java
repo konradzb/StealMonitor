@@ -1,13 +1,10 @@
 package com.kk.StealMonitor.unit.service;
 
-import com.kk.StealMonitor.dao.product.ProductDao;
 import com.kk.StealMonitor.model.Product;
 import com.kk.StealMonitor.service.product.ProductEditService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -111,7 +108,7 @@ public class ProductService {
                 new Product(id, link, name, siteName, oldPrice, newPrice, remainingQuantity, limitQuantity, img, category)));
 
         //it shouldn't work
-        assertEquals(productEditService.updateListOfProducts(idList, products), 0);
+        assertEquals(productEditService.updateRemainingListOfProducts(idList, products), 0);
     }
 //    @Test
 //    public void crypt() {

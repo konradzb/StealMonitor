@@ -49,7 +49,9 @@ public class ScheduleRunner {
         System.out.println("cron works");
         updateProductsRemainingQuantityByIDs(pages.get(0), "xkom_hotshot");
     }
-
+    //if program starts, it doesn't have informatio about idList in ProductService,
+    //so it won't delete any of product
+    //THINK ABOUT IT
     public int loadProductsToDataBaseAndSafeIDs(Page page, String key) {
         List<UUID> idList;
         //delete old products
@@ -64,15 +66,30 @@ public class ScheduleRunner {
         List<Product> products = productsLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
         //put them into DataBase, and safe its IDs
         idList = productService.insertListOfProducts(products);
-        productService.setOrCreateIdList(key,idList);
+        productService.setOrCreateIdList(key, idList);
         return 1;
     }
 
+    public int updateWholeProductsByIDs(Page page, String key) {
+        List<UUID> idList = null;
+        //delete old products
+        try {
+            idList = productService.getIdList(key);
+        } catch (NullPointerException ex) {
+            ex.fillInStackTrace();
+        }
+        if(idList==null) return 0;
+        //load all products from given page
+        List<Product> products = productsLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
+        //update products in DB
+        productService.updateListOfProducts(idList, products);
+        return 1;
+    }
     public int updateProductsRemainingQuantityByIDs(Page page, String key ) {
         List<Product> products = productsLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
         try {
             List<UUID> idList = productService.getIdList(key);
-            productService.updateListOfProducts(idList, products);
+            productService.updateRemainingListOfProducts(idList, products);
             return 1;
         } catch (NullPointerException ex) {
             ex.fillInStackTrace();
