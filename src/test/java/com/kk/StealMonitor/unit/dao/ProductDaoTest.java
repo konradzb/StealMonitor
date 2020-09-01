@@ -121,12 +121,38 @@ public class ProductDaoTest {
                 img,
                 category);
 
-        productDaoAccessService.updateProduct(id, product);
+        productDaoAccessService.updateProductRemainingQuantity(id, product);
     }
     @Test
     public void customSql() {
         String sql1 = "ORDER BY id_auto";
         String sql2 = "WHERE limit_quantity>'500' " + sql1;
         assertEquals(UUID.fromString("68c5db84-f41c-4156-9892-0f07b5e86192"), productDaoAccessService.getProductsWithCustomSql(sql2).get(0).getId());
+    }
+    @Test
+    public void updateWholeProduct() {
+        UUID id = UUID.fromString("07303e72-e7b6-4b71-b4d5-b634fcd32d13");
+
+        String name = "update name";
+        String link = "update link";
+        String siteName = "update name";
+        String oldPrice = "update old";
+        String newPrice = "update new";
+        String remainingQuantity = "51";
+        String limitQuantity = "99";
+        String img = "update img";
+        String category = "update category";
+
+        Product product = new Product(id,
+                link,
+                name,
+                siteName,
+                oldPrice,
+                newPrice,
+                remainingQuantity,
+                limitQuantity,
+                img,
+                category);
+        assertEquals(1, productDaoAccessService.updateProduct(id, product));
     }
 }

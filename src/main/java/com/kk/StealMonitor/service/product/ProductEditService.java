@@ -52,7 +52,7 @@ public class ProductEditService {
         return idList;
     }
     private int updateProductsRemaining(UUID id, Product product) {
-        return productDao.updateProduct(id, product);
+        return productDao.updateProductRemainingQuantity(id, product);
     }
 
     public int updateListOfProducts(List<UUID> idList, List<Product> products) {

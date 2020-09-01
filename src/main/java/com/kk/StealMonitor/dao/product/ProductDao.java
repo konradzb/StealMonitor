@@ -23,5 +23,7 @@ public interface ProductDao {
 
     int deleteProduct(UUID id);
 
+    int updateProductRemainingQuantity(UUID id, Product product);
+
     int updateProduct(UUID id, Product product);
 }

@@ -77,6 +77,11 @@ public class FakeProductDaoAccessService implements ProductDao {
     }
 
     @Override
+    public int updateProductRemainingQuantity(UUID id, Product product) {
+        return 0;
+    }
+
+    @Override
     public int updateProduct(UUID id, Product product) {
         return 0;
     }

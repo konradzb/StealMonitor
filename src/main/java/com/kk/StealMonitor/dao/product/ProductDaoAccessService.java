@@ -60,10 +60,35 @@ public class ProductDaoAccessService implements ProductDao{
     }
 
     @Override
-    public int updateProduct(UUID id, Product product) {
+    public int updateProductRemainingQuantity(UUID id, Product product) {
         final String sql = "UPDATE products SET remaining_quantity = '" + product.getRemainingQuantity() +
                 "' WHERE id = '"+ id +"';";
         return jdbcTemplate.update(sql);
+    }
+
+    @Override
+    public int updateProduct(UUID id, Product product) {
+        final String sql = "UPDATE products SET name=?, " +
+                "site_name= ?, " +
+                "site_link= ?, " +
+                "old_price= ?, " +
+                "new_price= ?, " +
+                "remaining_quantity= ?, " +
+                "limit_quantity= ?, " +
+                "img_string= ?, " +
+                "category= ? " +
+                "WHERE id = ?;";
+        return jdbcTemplate.update(sql,
+                product.getName(),
+                product.getSiteName(),
+                product.getSiteLink(),
+                product.getOldPrice(),
+                product.getNewPrice(),
+                product.getRemainingQuantity(),
+                product.getLimitQuantity(),
+                product.getImg(),
+                product.getCategory(),
+                id);
     }
 
     private List<Product> returnListFromDB(String sql) {

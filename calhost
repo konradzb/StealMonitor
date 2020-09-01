@@ -1,0 +1,12 @@
+                                                   List of databases
+     Name     |  Owner   | Encoding |           Collate           |            Ctype            |   Access privileges   
+--------------+----------+----------+-----------------------------+-----------------------------+-----------------------
+ postgres     | postgres | UTF8     | English_United Kingdom.1250 | English_United Kingdom.1250 | 
+ stealmonitor | postgres | UTF8     | English_United Kingdom.1250 | English_United Kingdom.1250 | 
+ template0    | postgres | UTF8     | English_United Kingdom.1250 | English_United Kingdom.1250 | =c/postgres          +
+              |          |          |                             |                             | postgres=CTc/postgres
+ template1    | postgres | UTF8     | English_United Kingdom.1250 | English_United Kingdom.1250 | =c/postgres          +
+              |          |          |                             |                             | postgres=CTc/postgres
+ todo_db      | postgres | UTF8     | English_United Kingdom.1250 | English_United Kingdom.1250 | 
+(5 rows)
+
