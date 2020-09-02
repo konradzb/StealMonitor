@@ -37,6 +37,9 @@ public class ScheduleRunner {
         this.productService = productService;
         this.pageDao = pageDao;
         pages = this.pageDao.getAllPages();
+
+        // at start, make sure that product table is clear,
+        // and after that load all products from all pages
     }
 
     @Scheduled(cron = "0 0 10/12 * * ?")
@@ -49,9 +52,13 @@ public class ScheduleRunner {
         System.out.println("cron works");
         updateProductsRemainingQuantityByIDs(pages.get(0), "xkom_hotshot");
     }
-    //if program starts, it doesn't have informatio about idList in ProductService,
-    //so it won't delete any of product
-    //THINK ABOUT IT
+
+    // at server's starts
+    public int clearTableAndLoadEveryProduct() {
+
+        return 1;
+    }
+
     public int loadProductsToDataBaseAndSafeIDs(Page page, String key) {
         List<UUID> idList;
         //delete old products
@@ -70,6 +77,7 @@ public class ScheduleRunner {
         return 1;
     }
 
+    //update whole products it's no needed for now
     public int updateWholeProductsByIDs(Page page, String key) {
         List<UUID> idList = null;
         //delete old products

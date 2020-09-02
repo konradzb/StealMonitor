@@ -28,6 +28,7 @@ public class ProductEditService {
         this.idLists = new HashMap<>();
     }
 
+    ////** INSERT **////
     public int insertProduct(UUID id, Product newTask) {
         if(Strings.isNullOrEmpty(newTask.getName())
         || Strings.isNullOrEmpty(newTask.getSiteName())
@@ -41,7 +42,6 @@ public class ProductEditService {
         }
         return productDao.insertProduct(id, newTask);
     }
-
     public List<UUID> insertListOfProducts(List<Product> products) {
         List<UUID> idList = new ArrayList<>();
         products.forEach(product -> {
@@ -51,21 +51,20 @@ public class ProductEditService {
         });
         return idList;
     }
+
+    ////** UPDATE **////
     private int updateProductsRemaining(UUID id, Product product) {
         return productDao.updateProductRemainingQuantity(id, product);
     }
-
     public int updateRemainingListOfProducts(List<UUID> idList, List<Product> products) {
         if(idList.size()!=products.size()) return 0;
         for (int i = 0; i < idList.size(); i++)
             updateProductsRemaining(idList.get(i), products.get(i));
         return 1;
     }
-
     private int updateProduct(UUID id, Product product) {
         return productDao.updateProduct(id, product);
     }
-
     public int updateListOfProducts(List<UUID> idList, List<Product> products) {
         if(idList.size()!=products.size()) return 0;
         for (int i = 0; i < idList.size(); i++)
@@ -73,20 +72,23 @@ public class ProductEditService {
         return 1;
     }
 
+    ////** DELETE **////
     private int deleteTask(UUID id) {
         return productDao.deleteProduct(id);
     }
-
     public int deleteListOfProducts(List<UUID> idList) {
         idList.forEach(this::deleteTask);
         return 1;
     }
+    public int deleteAllProducts() {
+        return productDao.deleteAllProducts();
+    }
 
+    ////** IDs List **////
     public List<UUID> getIdList(String key) {
         key = key.toLowerCase();
         return idLists.get(key);
     }
-
     public int setOrCreateIdList(String key, List<UUID> idList) {
         System.out.println(idList.size());
         key = key.toLowerCase();

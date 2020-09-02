@@ -60,6 +60,12 @@ public class ProductDaoAccessService implements ProductDao{
     }
 
     @Override
+    public int deleteAllProducts() {
+        final String sql = "DELETE FROM products;";
+        return jdbcTemplate.update(sql);
+    }
+
+    @Override
     public int updateProductRemainingQuantity(UUID id, Product product) {
         final String sql = "UPDATE products SET remaining_quantity = '" + product.getRemainingQuantity() +
                 "' WHERE id = '"+ id +"';";
