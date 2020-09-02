@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 /*
-* write comment here
+* It's a bridge between ProductDao and ScheduleRunner,
+* handle insert, update, delete ListOfProducts
+* It stores IDs products to update and delete in Map - idLists
+* Before products goes to the DB it checks if any var is nulleeeee
 * */
 @Service
 public class ProductEditService {
@@ -17,7 +20,6 @@ public class ProductEditService {
     private ProductDao productDao;
 
     //Lists with ids, to update and delete
-    private List<UUID> xKomIds;
     private Map<String,List<UUID>> idLists;
 
     @Autowired
@@ -26,6 +28,7 @@ public class ProductEditService {
         this.idLists = new HashMap<>();
     }
 
+    ////** INSERT **////
     public int insertProduct(UUID id, Product newTask) {
         if(Strings.isNullOrEmpty(newTask.getName())
         || Strings.isNullOrEmpty(newTask.getSiteName())
@@ -39,7 +42,6 @@ public class ProductEditService {
         }
         return productDao.insertProduct(id, newTask);
     }
-
     public List<UUID> insertListOfProducts(List<Product> products) {
         List<UUID> idList = new ArrayList<>();
         products.forEach(product -> {
@@ -49,42 +51,52 @@ public class ProductEditService {
         });
         return idList;
     }
-    public int updateProductsRemaining(UUID id, Product product) {
-        return productDao.updateProduct(id, product);
-    }
 
-    public int updateListOfProducts(List<UUID> idList, List<Product> products) {
+    ////** UPDATE **////
+    private int updateProductsRemaining(UUID id, Product product) {
+        return productDao.updateProductRemainingQuantity(id, product);
+    }
+    public int updateRemainingListOfProducts(List<UUID> idList, List<Product> products) {
         if(idList.size()!=products.size()) return 0;
         for (int i = 0; i < idList.size(); i++)
             updateProductsRemaining(idList.get(i), products.get(i));
         return 1;
     }
-
-    public int deleteTask(UUID id) {
-        return productDao.deleteProduct(id);
+    private int updateProduct(UUID id, Product product) {
+        return productDao.updateProduct(id, product);
+    }
+    public int updateListOfProducts(List<UUID> idList, List<Product> products) {
+        if(idList.size()!=products.size()) return 0;
+        for (int i = 0; i < idList.size(); i++)
+            updateProduct(idList.get(i), products.get(i));
+        return 1;
     }
 
-    //to testing
+    ////** DELETE **////
+    private int deleteTask(UUID id) {
+        return productDao.deleteProduct(id);
+    }
     public int deleteListOfProducts(List<UUID> idList) {
         idList.forEach(this::deleteTask);
         return 1;
     }
+    public int deleteAllProducts() {
+        return productDao.deleteAllProducts();
+    }
 
+    ////** IDs List **////
     public List<UUID> getIdList(String key) {
         key = key.toLowerCase();
         return idLists.get(key);
     }
-
     public int setOrCreateIdList(String key, List<UUID> idList) {
-        System.out.println(idList.size());
         key = key.toLowerCase();
         //check if it exist key like this,
-        //in case no, create one and put into idLists
+        //in case no, create one and put it into idLists
         if(idLists.containsKey(key))
             idLists.replace(key, idList);
         else
             idLists.put(key, idList);
-        System.out.println(idList.size());
         return 1;
     }
 }

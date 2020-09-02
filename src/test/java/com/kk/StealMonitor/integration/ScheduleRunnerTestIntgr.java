@@ -47,4 +47,20 @@ public class ScheduleRunnerTestIntgr {
         assertNotNull(productService.getIdList(key));
     }
 
+    @Test
+    public void updateProductsByIDsTest() {
+        Page page = pageDaoAccessService.getAllPages().get(0);
+        String key = "xkom_hotshot";
+
+        assertEquals(scheduleRunner.loadProductsToDataBaseAndSafeIDs(page, key), 1);
+        assertEquals(scheduleRunner.updateWholeProductsByIDs(page, key), 1);
+        assertNotNull(productService.getIdList(key));
+    }
+
+    @Test
+    public void substringUrl() {
+//        scheduleRunner.substringUrl("https://www.x-kom.pl");
+        System.out.println(scheduleRunner.substringUrl("http://www.x-kom.pl"));
+
+    }
 }

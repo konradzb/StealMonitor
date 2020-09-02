@@ -17,7 +17,7 @@ public class XKomScraper implements Scraper {
 
         return new Product(UUID.randomUUID(),
                 "xkom product",
-                "name",
+                "UPDATE - name",
                 "name",
                 "old",
                 "new",
