@@ -114,6 +114,7 @@ public class ScheduleRunner {
         }
         return 0;
     }
+
     public String substringUrl(String url) {
         int firstSlash = url.indexOf('/');
         url = url.substring(firstSlash+2);
