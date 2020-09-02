@@ -40,6 +40,7 @@ public class ScheduleRunner {
 
         // at start, make sure that product table is clear,
         // and after that load all products from all pages
+        clearTableAndLoadEveryProduct();
     }
 
     @Scheduled(cron = "0 0 10/12 * * ?")
@@ -49,13 +50,18 @@ public class ScheduleRunner {
 
     @Scheduled(cron = "0/30 * * * * ?")
     public void every30s() {
-        System.out.println("cron works");
         updateProductsRemainingQuantityByIDs(pages.get(0), "xkom_hotshot");
     }
 
     // at server's starts
     public int clearTableAndLoadEveryProduct() {
-
+        productService.deleteAllProducts();
+        //it should be pages.forEach(page-> loadProductsToDataBaseAndSafeIDs(pages.get(0), "xkom_hotshot"));
+        //but "key" has to be given automatically, and for now it's impossible,
+        //because in pageTable we don't store information about steal name
+        //eg. hotshot or alarmCenowy
+        //or instead of "sitename_stealname" we can use url, but without "https://"
+        loadProductsToDataBaseAndSafeIDs(pages.get(0), "xkom_hotshot");
         return 1;
     }
 
@@ -93,6 +99,7 @@ public class ScheduleRunner {
         productService.updateListOfProducts(idList, products);
         return 1;
     }
+
     public int updateProductsRemainingQuantityByIDs(Page page, String key ) {
         List<Product> products = productsLoader.loadProducts(page.getUrl(), page.getDivClassName(), page.getScraperClassPath());
         try {

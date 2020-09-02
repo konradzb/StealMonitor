@@ -90,15 +90,13 @@ public class ProductEditService {
         return idLists.get(key);
     }
     public int setOrCreateIdList(String key, List<UUID> idList) {
-        System.out.println(idList.size());
         key = key.toLowerCase();
         //check if it exist key like this,
-        //in case no, create one and put into idLists
+        //in case no, create one and put it into idLists
         if(idLists.containsKey(key))
             idLists.replace(key, idList);
         else
             idLists.put(key, idList);
-        System.out.println(idList.size());
         return 1;
     }
 }
