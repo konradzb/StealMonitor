@@ -56,4 +56,11 @@ public class ScheduleRunnerTestIntgr {
         assertEquals(scheduleRunner.updateWholeProductsByIDs(page, key), 1);
         assertNotNull(productService.getIdList(key));
     }
+
+    @Test
+    public void substringUrl() {
+//        scheduleRunner.substringUrl("https://www.x-kom.pl");
+        System.out.println(scheduleRunner.substringUrl("http://www.x-kom.pl"));
+
+    }
 }

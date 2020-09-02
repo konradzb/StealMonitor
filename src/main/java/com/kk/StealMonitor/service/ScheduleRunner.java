@@ -19,8 +19,7 @@ import java.util.UUID;
 *
 * Also every site has its own list in map in ProductEditService
 * you can get this by putting special String into ProductEditService.getIdList(String key)
-* key - goes like this "siteName_promotionName", eg. "XKom_hotShot", "Morele_AlarmCenowy"
-* it doesn't matter if you type Upper or lower case
+* key - it is url but without https://, eg. 'www.x-kom.pl'
 * */
 
 @Service
@@ -45,12 +44,12 @@ public class ScheduleRunner {
 
     @Scheduled(cron = "0 0 10/12 * * ?")
     public void every12h_10and22() {
-        loadProductsToDataBaseAndSafeIDs(pages.get(0), "xkom_hotshot");
+        loadProductsToDataBaseAndSafeIDs(pages.get(0), "www.x-kom.pl");
     }
 
     @Scheduled(cron = "0/30 * * * * ?")
     public void every30s() {
-        updateProductsRemainingQuantityByIDs(pages.get(0), "xkom_hotshot");
+        updateProductsRemainingQuantityByIDs(pages.get(0), "www.x-kom.pl");
     }
 
     // at server's starts
@@ -61,7 +60,11 @@ public class ScheduleRunner {
         //because in pageTable we don't store information about steal name
         //eg. hotshot or alarmCenowy
         //or instead of "sitename_stealname" we can use url, but without "https://"
-        loadProductsToDataBaseAndSafeIDs(pages.get(0), "xkom_hotshot");
+
+        //loadProductsToDataBaseAndSafeIDs(pages.get(0), "xkom_hotshot");
+
+        pages.forEach(page-> loadProductsToDataBaseAndSafeIDs(page, substringUrl(page.getUrl())));
+        System.out.println(productService.getIdList("www.x-kom.pl"));
         return 1;
     }
 
@@ -110,5 +113,10 @@ public class ScheduleRunner {
             ex.fillInStackTrace();
         }
         return 0;
+    }
+    public String substringUrl(String url) {
+        int firstSlash = url.indexOf('/');
+        url = url.substring(firstSlash+2);
+        return url;
     }
 }
