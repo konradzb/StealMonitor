@@ -41,15 +41,26 @@ public class ScheduleRunner {
         // and after that load all products from all pages
         clearTableAndLoadEveryProduct();
     }
-
+    ////** Refresh full product **////
     @Scheduled(cron = "0 0 10/12 * * ?")
     public void every12h_10and22() {
         loadProductsToDataBaseAndSafeIDs(pages.get(0), "www.x-kom.pl");
     }
+    @Scheduled(cron = "0 0 14 * * ?")
+    public void every24h_14() {
+        loadProductsToDataBaseAndSafeIDs(pages.get(1), "www.morele.net/alarmcenowy/");
+    }
 
+    ////** Update remaining quantity **////
     @Scheduled(cron = "0/30 * * * * ?")
     public void every30s() {
+        System.out.println(productService.getIdList("www.x-kom.pl"));
         updateProductsRemainingQuantityByIDs(pages.get(0), "www.x-kom.pl");
+    }
+    @Scheduled(cron = "0 0/3 * * * ?")
+    public void every3min() {
+        System.out.println(productService.getIdList("www.morele.net/alarmcenowy/"));
+        updateProductsRemainingQuantityByIDs(pages.get(1), "www.morele.net/alarmcenowy/");
     }
 
     // at server's starts
@@ -62,7 +73,6 @@ public class ScheduleRunner {
         //or instead of "sitename_stealname" we can use url, but without "https://"
 
         //loadProductsToDataBaseAndSafeIDs(pages.get(0), "xkom_hotshot");
-
         pages.forEach(page-> loadProductsToDataBaseAndSafeIDs(page, substringUrl(page.getUrl())));
         System.out.println(productService.getIdList("www.x-kom.pl"));
         return 1;
