@@ -25,7 +25,7 @@ public class ScheduleRunnerTestIntgr {
     public void load_XKom_HotShotTest() {
         Page page = pageDaoAccessService.getAllPages().get(0);
 
-        String key = "xkom_hotshot";
+        String key = "http://www.x-kom.pl";
         String key2 = "xkom_wakacyjnaPromocja";
 
         assertEquals(scheduleRunner.loadProductsToDataBaseAndSafeIDs(page, key), 1);
@@ -40,7 +40,7 @@ public class ScheduleRunnerTestIntgr {
     @Test
     public void updateProductsRemainingQuantityByIDsTest() {
         Page page = pageDaoAccessService.getAllPages().get(0);
-        String key = "xkom_hotshot";
+        String key = "http://www.x-kom.pl";
 
         assertEquals(scheduleRunner.loadProductsToDataBaseAndSafeIDs(page, key), 1);
         assertEquals(scheduleRunner.updateProductsRemainingQuantityByIDs(page, key), 1);
@@ -50,7 +50,7 @@ public class ScheduleRunnerTestIntgr {
     @Test
     public void updateProductsByIDsTest() {
         Page page = pageDaoAccessService.getAllPages().get(0);
-        String key = "xkom_hotshot";
+        String key = "http://www.x-kom.pl";
 
         assertEquals(scheduleRunner.loadProductsToDataBaseAndSafeIDs(page, key), 1);
         assertEquals(scheduleRunner.updateWholeProductsByIDs(page, key), 1);
