@@ -20,7 +20,7 @@ public class ProductEditService {
     private ProductDao productDao;
 
     //Lists with ids, to update and delete
-    private Map<String,List<UUID>> idLists;
+    private Map<String, List<UUID>> idLists;
 
     @Autowired
     public ProductEditService(@Qualifier("PostgresProduct") ProductDao productDao) {
@@ -54,10 +54,23 @@ public class ProductEditService {
 
     ////** UPDATE **////
     private int updateProductsRemaining(UUID id, Product product) {
-        return productDao.updateProductRemainingQuantity(id, product);
+        try {
+            int re = Integer.parseInt(product.getRemainingQuantity());
+            if(re > 0)
+                return productDao.updateProductRemainingQuantity(id, product);
+            return deleteTask(id);
+            // if remaining quantity is lower than 0, it will delete product
+            // after this list of IDs will be longer than product list
+            // but it's not problem because delete Task works on Optional<Product>
+            // if it's not find a product, it'll do nothing
+        } catch (NumberFormatException ex) {
+            ex.fillInStackTrace();
+            System.out.println("remaining quantity cannot be parse to int... " + ex.getMessage());
+        }
+        return 0;
     }
     public int updateRemainingListOfProducts(List<UUID> idList, List<Product> products) {
-        if(idList.size()!=products.size()) return 0;
+        if(idList.size() < products.size()) return 0;
         for (int i = 0; i < idList.size(); i++)
             updateProductsRemaining(idList.get(i), products.get(i));
         return 1;
@@ -66,7 +79,7 @@ public class ProductEditService {
         return productDao.updateProduct(id, product);
     }
     public int updateListOfProducts(List<UUID> idList, List<Product> products) {
-        if(idList.size()!=products.size()) return 0;
+        if(idList.size() < products.size()) return 0;
         for (int i = 0; i < idList.size(); i++)
             updateProduct(idList.get(i), products.get(i));
         return 1;

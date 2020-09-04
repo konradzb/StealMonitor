@@ -20,7 +20,7 @@ public class MoreleScraper implements Scraper {
                 "name",
                 "old",
                 "new",
-                "32",
+                "0",
                 "50",
                 "img",
                 "category");
