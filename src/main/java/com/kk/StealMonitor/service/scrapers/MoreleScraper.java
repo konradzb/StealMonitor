@@ -15,14 +15,14 @@ public class MoreleScraper implements Scraper {
     @Override
     public Product scrap(Element element) {
         return new Product(UUID.randomUUID(),
-                "morele alar cenowy",
-                "mo - name",
-                "name",
-                "old",
-                "new",
-                "0",
-                "50",
-                "img",
-                "category");
+                "Smartfon Apple iPhone 11 64 GB Dual SIM Zielony (MWLY2PM/A)",
+                "morele.net",
+                "https://www.morele.net/alarmcenowy/",
+                "3269 zł",
+                "3159 zł",
+                "1",
+                "1",
+                "https://images.morele.net/i256/6297964_0_i256.jpg",
+                "smartphone");
     }
 }
