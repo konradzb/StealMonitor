@@ -10,3 +10,5 @@ Old project build in
 - HTML
 - CSS
 
+Old repo: https://github.com/bernasjava/StealMonitorV2
+
