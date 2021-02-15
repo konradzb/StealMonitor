@@ -1,0 +1,2 @@
+--INSERT INTO pages (id, url, divClassName, scraperClassPath, refreshTime, hoursBetweenGet, hoursBetweenUpdate)
+--VALUES ('db93cfeb-22e2-4b24-b977-eafec906e1a2', 'https://www.x-kom.pl', 'sc-1bb6kqq-10 kBnBfM m80syu-0 hGKlIY','com.kk.StealMonitor.service.scrapers.XKomScraper', '30000', '');

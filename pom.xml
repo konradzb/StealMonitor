@@ -35,7 +35,11 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+<<<<<<< HEAD
 			<version>4.13</version>
+=======
+			<version>4.13.1</version>
+>>>>>>> ba2bd4e93cd2bdc63adebd3e8be115630d8388e2
 			<scope>test</scope>
 		</dependency>
 
@@ -54,15 +58,26 @@
 			<version>2.0.1.Final</version>
 		</dependency>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ba2bd4e93cd2bdc63adebd3e8be115630d8388e2
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+<<<<<<< HEAD
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->
 <!--			<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
 <!--		</dependency>-->
+=======
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+>>>>>>> ba2bd4e93cd2bdc63adebd3e8be115630d8388e2
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -81,6 +96,7 @@
 			</exclusions>
 		</dependency>
 
+<<<<<<< HEAD
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->
 <!--			<artifactId>spring-boot-starter-jdbc</artifactId>-->
@@ -96,6 +112,23 @@
 <!--			<groupId>org.flywaydb</groupId>-->
 <!--			<artifactId>flyway-core</artifactId>-->
 <!--		</dependency>-->
+=======
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-jdbc</artifactId>
+				</dependency>
+
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+
+				<dependency>
+					<groupId>org.flywaydb</groupId>
+					<artifactId>flyway-core</artifactId>
+				</dependency>
+>>>>>>> ba2bd4e93cd2bdc63adebd3e8be115630d8388e2
 
 		<dependency>
 			<groupId>org.jsoup</groupId>
