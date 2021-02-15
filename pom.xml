@@ -36,7 +36,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 <<<<<<< HEAD
-			<version>4.13</version>
+			<version>4.13.1</version>
 =======
 			<version>4.13.1</version>
 >>>>>>> ba2bd4e93cd2bdc63adebd3e8be115630d8388e2
